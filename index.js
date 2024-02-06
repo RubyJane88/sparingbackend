@@ -12,25 +12,25 @@ const allowedOrigins = [process.env.CORS_ORIGIN_1, process.env.CORS_ORIGIN_2];
 
 const cleanOrigins = allowedOrigins.map((origin) => origin.replace(/\/$/, ""));
 
-app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 
 app.use(
   cors({
-    origin: function (origin, callback) {
-      if (!origin || cleanOrigins.includes(origin)) {
-        callback(null, true);
-      } else {
-        console.log("Blocked origin:", origin);
-        callback(new Error("Not allowed by CORS"));
-      }
-    },
-    credentials: true,
+    origin: "*",
+    // origin: function (origin, callback) {
+    //   if (!origin || cleanOrigins.includes(origin)) {
+    //     callback(null, true);
+    //   } else {
+    //     console.log("Blocked origin:", origin);
+    //     callback(new Error("Not allowed by CORS"));
+    //   }
+    // },
+    // credentials: true,
   })
 );
 
 app.use(indexRouter);
-
 app.use(errorHandler);
 
 app.listen(port, () => {

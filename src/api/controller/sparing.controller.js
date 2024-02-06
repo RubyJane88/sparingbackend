@@ -1,9 +1,38 @@
 const service = require("../service/sparing.service");
+const Joi = require("joi");
 
 class controller {
   async getSparingData(payload) {
+    const schema = Joi.object({
+      accountType: Joi.string(),
+      currentSavings: Joi.number(),
+      freeWithdrawal: Joi.number(),
+      interestRateMin: Joi.number(),
+      interestRateMax: Joi.number(),
+      maxDepositAmount: Joi.number(),
+      minDepositAmount: Joi.number(),
+    });
+
+    const { error } = schema.validate(payload);
+    if (error) {
+      return {
+        status: 400,
+        success: false,
+        message: "Validation error",
+        error: error.details[0].message,
+      };
+    }
+
     try {
-      const data = service.getSparingData();
+      const data = service.getSparingData(payload);
+      if (!data.length > 0) {
+        return {
+          status: 200,
+          success: false,
+          message: "No sparing data received",
+          data: null,
+        };
+      }
 
       return {
         status: 200,
