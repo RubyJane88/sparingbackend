@@ -7,7 +7,7 @@ class controller {
       accountType: Joi.string(),
       currentSavings: Joi.number(),
       freeWithdrawal: Joi.number(),
-      interestRateMin: Joi.number(),
+      // interestRateMin: Joi.number(),
       interestRateMax: Joi.number(),
       maxDepositAmount: Joi.number(),
       minDepositAmount: Joi.number(),

@@ -8,8 +8,9 @@ const jsonData = parser.parse(xmlData);
 const uniqueGroups = _.uniqBy(jsonData.feed.entry, "f:gruppe").map(
   (entry) => entry["f:gruppe"]
 );
-// console.log(uniqueGroups);
 
+
+ 
 class service {
   getSparingData(payload) {
     const {
