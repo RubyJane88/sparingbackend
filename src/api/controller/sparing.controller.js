@@ -5,12 +5,10 @@ class controller {
   async getSparingData(payload) {
     const schema = Joi.object({
       accountType: Joi.string(),
-      currentSavings: Joi.number(),
-      freeWithdrawal: Joi.number(),
-      // interestRateMin: Joi.number(),
-      interestRateMax: Joi.number(),
-      maxDepositAmount: Joi.number(),
       minDepositAmount: Joi.number(),
+      maxDepositAmount: Joi.number(),
+      freeWithdrawal: Joi.number(),
+      currentSavings: Joi.number(),
     });
 
     const { error } = schema.validate(payload);
